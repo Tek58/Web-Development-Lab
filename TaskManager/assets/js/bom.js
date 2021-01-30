@@ -27,7 +27,7 @@ document.getElementById('appName').innerHTML =  navigator.appName ;
 document.getElementById('appVersion').innerHTML =  navigator.appVersion; 
 document.getElementById('platform').innerHTML =  navigator.platform; 
 document.getElementById('language').innerHTML =  navigator.language; 
-document.getElementById('cookieEnabled').innerHTML =  (navigator.cookieEnabled); 
+document.getElementById('cookieEnabled').innerHTML =  navigator.cookieEnabled; 
 
 
 //Screen Information
@@ -42,4 +42,7 @@ if (history.state === null) {
     document.getElementById('state').innerHTML = 'null';
 }else{
     document.getElementById('state').innerHTML = history.state;
+}
+function reloadPage() {
+    location.reload();
 }
