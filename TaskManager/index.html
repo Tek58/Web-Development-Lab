@@ -9,6 +9,9 @@
     <!-- Font Owesome Compiled and minified CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!-- Custom Css -->
+    <!-- CSS only -->
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
 
     <link rel="shortcut icon" type="image/svg" href="assets/images/tasks-solid.svg" />
@@ -57,10 +60,30 @@
                 </div>
                 <div class="card-action">
                     <h5 id="task-title">List of Tasks</h5>
+                    <div class="dropdown show d-flex justify-content-end">
+                        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Filter
+                        </a>
+                        
+                        <div class="dropdown-menu dropDown" aria-labelledby="dropdownMenuLink" >
+                            <a class="dropdown-item A_Z" href="#" style="color: black;">Ascending</a>
+                            <a class="dropdown-item Z_A" href="#" style="color: black;">Decending</a>
+                        </div>
+                    </div>
+
+                    <!-- <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Filter</a>
+
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li><a href="#!">A-Z</a></li>
+                        <li><a href="#!">Z-A</a></li>
+                        <li><a href="#!">By Date</a></li>
+                    </ul> -->
+                                        
                     <div class="input-field col s12">
                         <input type="search" name="filter" id="filter">
                         <label for="filter">Search</label>
                     </div>
+                    
                     <ul class="collection" id="myUl">
                         <!-- Here is the task list goes  -->
                     </ul>
@@ -76,10 +99,12 @@
 
 
 
-
     <!-- Jquery Compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <!-- Materialize Compiled and minified JavaScript -->
+    <!-- JavaScript Bundle with Popper -->
+    <script src="./assets/js/bootstrap.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Our Own Js  -->
     <script src="assets/js/app.js"></script>
