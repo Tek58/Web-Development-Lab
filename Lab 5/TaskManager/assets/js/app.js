@@ -1,5 +1,6 @@
 const reloadIcon = document.querySelector('.fa'); 
 const taskInput = document.querySelector('#task');
+const dateInput = document.querySelector('#dateInput');
 const form = document.querySelector('#task-form');
 const filter = document.querySelector('#filter');
 const taskList = document.querySelector('.collection'); 
@@ -18,49 +19,29 @@ taskList.addEventListener('click', removeTask);
 reloadIcon.addEventListener('click', reloadPage);
 
 // ***********************************************************************
-aUpToz.addEventListener('click', filterAuptoZ);
-zUpToa.addEventListener('click', filterZuptoA);
+// aUpToz.addEventListener('click', filterAuptoZ);
+// zUpToa.addEventListener('click', filterZuptoA);
 
 // ***********************************************************************
-function filterAuptoZ(){
-    var txtValue, ul, li, a; 
-    ul = document.getElementById("myUl");
-    li = ul.getElementsByTagName('li');
-    var lis  = []
-    for (i = 0; i < li.length; i++) {
-        a = li[i].firstChild;
-        txtValue = a.textContent;
-        lis.push(textValue)
-      }
+// function filterZuptoA(e){
+//     var txtValue, ul, li, a; 
+//     ul = document.getElementById("myUl");
+//     li = ul.getElementsByTagName('li');
+//     var lis  = []
+//     for (i = 0; i < li.length; i++) {
+//         a = li[i].firstChild;
+//         txtValue = a.textContent;
+//         lis.push(textValue)
+//       }
 
-    var sortedLis =  lis.sort(function (a, b) {var dateA = new Date(a.date), dateB = new Date(b.date)
-        return dateA - dateB
-    });
-    for (i = 0; i < li.length; i++) {
-        a = li[i].firstChild;
-        a = sortedLis[i] 
-      }
-}
-
-function filterZuptoA(e){
-    var txtValue, ul, li, a; 
-    ul = document.getElementById("myUl");
-    li = ul.getElementsByTagName('li');
-    var lis  = []
-    for (i = 0; i < li.length; i++) {
-        a = li[i].firstChild;
-        txtValue = a.textContent;
-        lis.push(textValue)
-      }
-
-    var sortedLis =  lis.sort(function (a, b) {var dateA = new Date(a.date), dateB = new Date(b.date)
-        return dateB - dateA
-    });
-    for (i = 0; i < li.length; i++) {
-        a = li[i].firstChild;
-        a = sortedLis[i] 
-      }
-}
+//     var sortedLis =  lis.sort(function (a, b) {var dateA = new Date(a.date), dateB = new Date(b.date)
+//         return dateB - dateA
+//     });
+//     for (i = 0; i < li.length; i++) {
+//         a = li[i].firstChild;
+//         a = sortedLis[i] 
+//       }
+// }
 // ****************************************************************************************************
 
 
@@ -72,15 +53,20 @@ function addNewTask(e){
 
         return;
     }
+    if (dateInput.value === ''){
+        dateInput.style.borderColor="red";
+
+        return;
+    }
     const li = document.createElement('li');
     li.className = 'collection-item';
-    li.appendChild(document.createTextNode(taskInput.value));
+    li.appendChild(document.createTextNode(taskInput.value + "   "));
+    li.appendChild(document.createTextNode(dateInput.value));
     const link = document.createElement('a');
     link.className = 'delete-item secondary-content';
     link.innerHTML = '<i class="fa fa-remove"></i>';
     li.appendChild(link);
     taskList.appendChild(li);
-
 
 }
 
