@@ -5,11 +5,8 @@ const form = document.querySelector('#task-form');
 const filter = document.querySelector('#filter');
 const taskList = document.querySelector('.collection'); 
 const clearBtn = document.querySelector('.clear-tasks'); 
-
-// ***********************************************************************
-const aUpToz = document.querySelector('A_Z');
-const zUpToa = document.querySelector('Z_A');
-// ***********************************************************************
+const asscending = document.querySelector('.asc');
+const decending = document.querySelector('.des');
 
 
 form.addEventListener('submit', addNewTask);
@@ -17,32 +14,29 @@ clearBtn.addEventListener('click', clearAllTasks);
 filter.addEventListener('keyup', filterTasks);
 taskList.addEventListener('click', removeTask);
 reloadIcon.addEventListener('click', reloadPage);
+asscending.addEventListener("click", sortAsc  )
+decending.addEventListener("click", sortDsc )
 
-// ***********************************************************************
-// aUpToz.addEventListener('click', filterAuptoZ);
-// zUpToa.addEventListener('click', filterZuptoA);
 
-// ***********************************************************************
-// function filterZuptoA(e){
-//     var txtValue, ul, li, a; 
-//     ul = document.getElementById("myUl");
-//     li = ul.getElementsByTagName('li');
-//     var lis  = []
-//     for (i = 0; i < li.length; i++) {
-//         a = li[i].firstChild;
-//         txtValue = a.textContent;
-//         lis.push(textValue)
-//       }
+function createTask(task, date) {
+    const li = document.createElement("li");
+    li.className = "collection-item";
+    const p = document.createElement("p")
+    p.innerHTML = task
+    li.appendChild(p);
+    const link = document.createElement("a");
+    link.className = "delete-item secondary-content";
+    link.innerHTML = '<i class="fa fa-remove"></i>';
+    li.appendChild(link);
+    taskList.appendChild(li);
+    const addDate = document.createElement("p")
+    addDate.className = "d-none"
+    addDate.innerHTML = date
+    li.appendChild(addDate)
+}
 
-//     var sortedLis =  lis.sort(function (a, b) {var dateA = new Date(a.date), dateB = new Date(b.date)
-//         return dateB - dateA
-//     });
-//     for (i = 0; i < li.length; i++) {
-//         a = li[i].firstChild;
-//         a = sortedLis[i] 
-//       }
-// }
-// ****************************************************************************************************
+
+
 
 
 function addNewTask(e){
@@ -53,21 +47,55 @@ function addNewTask(e){
 
         return;
     }
-    if (dateInput.value === ''){
-        dateInput.style.borderColor="red";
+    const nowDate = new Date();
+    const nowDateString = nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds() + ":" + nowDate.getMilliseconds()
 
-        return;
-    }
-    const li = document.createElement('li');
-    li.className = 'collection-item';
-    li.appendChild(document.createTextNode(taskInput.value + "   "));
-    li.appendChild(document.createTextNode(dateInput.value));
-    const link = document.createElement('a');
-    link.className = 'delete-item secondary-content';
-    link.innerHTML = '<i class="fa fa-remove"></i>';
-    li.appendChild(link);
-    taskList.appendChild(li);
+    createTask(taskInput.value, nowDateString)
+    sortAsc()
+    taskInput.value = "";
 
+}
+
+function sortAsc() {
+    const allTasks = document.querySelectorAll('.collection-item')
+    const allContents = []
+    allTasks.forEach(function (task) {
+        let content = {
+            task: task.childNodes[0].textContent,
+            date: task.childNodes[2].textContent
+        }
+
+        allContents.push(content)
+    })
+
+    const sortedContent = allContents.sort((a, b) => (a.date > b.date) ? 1 : -1)
+
+
+    document.querySelector('.collection').innerHTML = ''
+    sortedContent.forEach(function (task) {
+        createTask(task.task, task.date)
+    })
+}
+
+function sortDsc() {
+    const allTasks = document.querySelectorAll('.collection-item')
+    const allContents = []
+    allTasks.forEach(function (task) {
+        let content = {
+            task: task.childNodes[0].textContent,
+            date: task.childNodes[2].textContent
+        }
+
+        allContents.push(content)
+    })
+
+    const sortedContent = allContents.reverse((a, b) => (a.date > b.date) ? 1 : -1)
+
+
+    document.querySelector('.collection').innerHTML = ''
+    sortedContent.forEach(function (task) {
+        createTask(task.task, task.date)
+    })
 }
 
 function clearAllTasks(){
@@ -94,8 +122,6 @@ function filterTasks(e) {
 // *************************************************************************************
 
 
-// *************************************************************************************
-
 function removeTask(e){
     if (e.target.parentElement.classList.contains('delete-item')){
         if (confirm('Are you Sure aboyt that ?')){
@@ -107,7 +133,3 @@ function removeTask(e){
 function reloadPage() {
     location.reload();
 }
-// document.addEventListener('DOMContentLoaded', function() {
-//     var elems = document.querySelectorAll('.dropdown-trigger');
-//     var instances = M.Dropdown.init(elems, options);
-//   });
